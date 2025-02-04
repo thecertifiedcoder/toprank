@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply - Leatherwork Apprenticeship</title>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <style>
+    body {
+      background-image: url('https://i.ibb.co/xKZx2qdF/Datamedcard-Popular-Shoes-Microfiber-Leather-Men-Boots-Outdoor-Sports-Non-slip-High-top-Hiking-Shoes.jpg');
+      background-size: cover;
+      background-position: center;
+      backdrop-filter: blur(5px);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      color: #fff;
+    }
+    label, input, textarea, select {
+      color: #fff;
+    }
+    input, textarea, select {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    input::placeholder, textarea::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+  <section class="w-full max-w-lg">
+    <h2 class="text-3xl font-bold text-center text-yellow-600 mb-6">Join Our Leatherwork Apprenticeship Program</h2>
+    <p class="text-center text-white mb-4">Fill out the form below, and we’ll reach out to you soon!</p>
+    <form id="applicationForm" class="glass-card">
+      <div>
+        <label class="block text-sm font-medium">Full Name</label>
+        <input type="text" id="full-name" class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-500" required>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Email</label>
+        <input type="email" id="email" class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-500" required>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Phone Number</label>
+        <input type="tel" id="phone" class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-500" required>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Date of Birth</label>
+        <input type="date" id="dob" class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-500" required>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Address</label>
+        <textarea id="address" class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-500" required></textarea>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Experience Level</label>
+        <select id="experience" class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-500" required>
+          <option value="" disabled selected>Select an option</option>
+          <option value="no-experience">I have no experience</option>
+          <option value="some-knowledge">I know a little</option>
+          <option value="hands-on">I have hands-on experience</option>
+          <option value="skilled">I am skilled</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Tell us why you're excited to join!</label>
+        <textarea id="why-join" class="w-full mt-1 p-2 border rounded-lg focus:ring-2 focus:ring-yellow-500" required></textarea>
+      </div>
+      <button type="submit" class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700">Apply Now</button>
+    </form>
+    <p id="successMessage" class="text-green-300 text-center mt-4 hidden">Thank you for applying! We will contact you soon.</p>
+  </section>
+
+  <script>
+    document.getElementById("applicationForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      let formData = new FormData(this);
+      fetch('https://your-server-endpoint.com/send-email', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("successMessage").classList.remove("hidden");
+      })
+      .catch(error => console.error('Error:', error));
+    });
+  </script>
+</body>
+</html>
